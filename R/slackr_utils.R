@@ -119,7 +119,7 @@ slackr_ims <- function(api_token=Sys.getenv("SLACK_API_TOKEN")) {
   tmp <- POST("https://slack.com/api/im.list", body=list(token=api_token))
   ims <- jsonlite::fromJSON(content(tmp, as="text"))$ims
   users <- slackr_users(api_token)
-  left_join(users, ims, by="id")
+  merge(users, ims, by.x="id", by.y='user') #error 25 fix
 
 }
 
